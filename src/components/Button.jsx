@@ -1,4 +1,10 @@
-function Button({ label, onClick, variant = "primary", children }) {
+function Button({
+  label,
+  onClick,
+  variant = "primary",
+  children,
+  className = "",
+}) {
   const styles =
     variant === "danger"
       ? "bg-red-600 hover:bg-red-700"
@@ -6,8 +12,9 @@ function Button({ label, onClick, variant = "primary", children }) {
 
   return (
     <button
+      type="button"
       onClick={onClick}
-      className={`${styles} rounded px-4 py-2 text-white`}
+      className={`${styles} rounded border-2 border-white px-4 py-2 font-medium text-white shadow-sm transition hover:shadow-md ${className}`}
     >
       {children || label}
     </button>
