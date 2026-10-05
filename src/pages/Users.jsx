@@ -4,22 +4,11 @@ import UserCard from '../components/UserCard'
 import Loader from '../components/Loader'
 import ErrorMessage from '../components/ErrorMessage'
 
-function Users() {
-  useEffect(() => {
-    document.title = 'Users | Team Directory App'
-  }, [])
+function Users({ favoriteIds, onToggleFavorite }) {
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [search, setSearch] = useState('')
-  const [favoriteIds, setFavoriteIds] = useState(() => {
-    try {
-      const savedFavorites = localStorage.getItem('favoriteUsers')
-      return savedFavorites ? JSON.parse(savedFavorites) : []
-    } catch {
-      return []
-    }
-  })
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false)
 
   useEffect(() => {
@@ -52,18 +41,6 @@ function Users() {
     }
   }, [])
 
-  useEffect(() => {
-    localStorage.setItem('favoriteUsers', JSON.stringify(favoriteIds))
-  }, [favoriteIds])
-
-  const toggleFavorite = (id) => {
-    setFavoriteIds((currentFavorites) =>
-      currentFavorites.includes(id)
-        ? currentFavorites.filter((favoriteId) => favoriteId !== id)
-        : [...currentFavorites, id],
-    )
-  }
-
   const filteredUsers = useMemo(() => {
     const searchTerm = search.trim().toLowerCase()
 
@@ -81,10 +58,16 @@ function Users() {
     })
   }, [users, search, showFavoritesOnly, favoriteIds])
 
+  useEffect(() => {
+    document.title = `Users (${filteredUsers.length})`
+  }, [filteredUsers.length])
+
   if (loading) {
     return (
       <main className="min-h-[calc(100vh-72px)] bg-white p-6 dark:bg-slate-950">
-        <h1 className="mb-6 text-3xl font-bold text-gray-900 dark:text-white">Users</h1>
+        <h1 className="mb-6 text-3xl font-bold text-gray-900 dark:text-white">
+          Users
+        </h1>
         <Loader />
       </main>
     )
@@ -92,16 +75,20 @@ function Users() {
 
   if (error) {
     return (
-      <main className="p-6">
-        <h1 className="mb-6 text-3xl font-bold">Users</h1>
+      <main className="min-h-[calc(100vh-72px)] bg-white p-6 dark:bg-slate-950">
+        <h1 className="mb-6 text-3xl font-bold text-gray-900 dark:text-white">
+          Users
+        </h1>
         <ErrorMessage message={error} />
       </main>
     )
   }
 
   return (
-    <main className="p-6">
-      <h1 className="mb-6 text-3xl font-bold">Users</h1>
+    <main className="min-h-[calc(100vh-72px)] bg-white p-6 dark:bg-slate-950">
+      <h1 className="mb-6 text-3xl font-bold text-gray-900 dark:text-white">
+        Users
+      </h1>
 
       <div className="mb-6 flex flex-col gap-3 md:flex-row">
         <input
@@ -136,7 +123,7 @@ function Users() {
               email={user.email}
               company={user.company}
               isFavorite={favoriteIds.includes(user.id)}
-              onToggleFavorite={() => toggleFavorite(user.id)}
+              onToggleFavorite={() => onToggleFavorite(user.id)}
             />
           ))}
         </div>
