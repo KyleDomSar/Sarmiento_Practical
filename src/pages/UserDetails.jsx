@@ -7,13 +7,21 @@ function UserDetails() {
   const [user, setUser] = useState(undefined)
 
   useEffect(() => {
-    const foundUser = usersData.find((item) => item.id === Number(id))
-    setUser(foundUser || null)
+    const timer = setTimeout(() => {
+      const foundUser = usersData.find((item) => item.id === Number(id))
+      setUser(foundUser || null)
+    }, 0)
 
-    document.title = foundUser
-      ? foundUser.name
-      : 'User Not Found'
+    return () => clearTimeout(timer)
   }, [id])
+
+  useEffect(() => {
+    if (user) {
+      document.title = user.name
+    } else if (user === null) {
+      document.title = 'User Not Found'
+    }
+  }, [user])
 
   if (user === undefined) {
     return (
