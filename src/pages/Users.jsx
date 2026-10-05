@@ -80,8 +80,8 @@ function Users() {
 
   if (loading) {
     return (
-      <main className="p-6">
-        <h1 className="mb-6 text-3xl font-bold">Users</h1>
+      <main className="min-h-[calc(100vh-72px)] bg-white p-6 dark:bg-slate-950">
+        <h1 className="mb-6 text-3xl font-bold text-gray-900 dark:text-white">Users</h1>
         <Loader />
       </main>
     )
@@ -106,21 +106,21 @@ function Users() {
           value={search}
           onChange={(event) => setSearch(event.target.value)}
           placeholder="Search by name, email, or company..."
-          className="flex-1 rounded-lg border border-gray-300 px-4 py-2 outline-none focus:border-blue-600"
+          className="flex-1 rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 outline-none focus:border-blue-600 dark:border-slate-700 dark:bg-slate-800 dark:text-white"
           aria-label="Search users"
         />
 
         <button
           type="button"
           onClick={() => setShowFavoritesOnly((current) => !current)}
-          className="rounded-lg bg-gray-900 px-4 py-2 text-white hover:bg-gray-800"
+          className="rounded-lg bg-gray-900 px-4 py-2 text-white hover:bg-gray-800 dark:bg-slate-700 dark:hover:bg-slate-600"
         >
           {showFavoritesOnly ? 'Show All Users' : 'Show Favorites'}
         </button>
       </div>
 
       {filteredUsers.length === 0 ? (
-        <p className="rounded-lg border border-gray-200 p-6 text-center text-gray-600">
+        <p className="rounded-lg border border-gray-200 p-6 text-center text-gray-600 dark:border-slate-700 dark:text-slate-300">
           No users found.
         </p>
       ) : (
