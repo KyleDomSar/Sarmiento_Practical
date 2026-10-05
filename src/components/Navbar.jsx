@@ -1,34 +1,39 @@
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+import Button from './Button'
 
-function Navbar({ darkMode, onToggleDarkMode }) {
+function Navbar({ darkMode, onToggleDarkMode, favoriteCount }) {
+  const linkClass = ({ isActive }) =>
+    isActive ? 'font-semibold underline' : 'hover:underline'
+
   return (
     <nav className="bg-blue-600 px-6 py-4 text-white dark:bg-slate-900">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4">
-        <Link to="/" className="text-xl font-bold">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4">
+        <NavLink to="/" className="text-xl font-bold">
           Team Directory App
-        </Link>
+        </NavLink>
 
-        <div className="flex items-center gap-4">
-          <div className="flex gap-4">
-            <Link to="/" className="hover:underline">
+        <div className="flex flex-wrap items-center gap-4">
+          <div className="flex items-center gap-4">
+            <NavLink to="/" className={linkClass}>
               Home
-            </Link>
-            <Link to="/users" className="hover:underline">
+            </NavLink>
+            <NavLink to="/users" className={linkClass}>
               Users
-            </Link>
-            <Link to="/about" className="hover:underline">
+            </NavLink>
+            <NavLink to="/about" className={linkClass}>
               About
-            </Link>
+            </NavLink>
           </div>
 
-          <button
-            type="button"
+          <span className="text-sm font-medium">
+            Favorites: {favoriteCount}
+          </span>
+
+          <Button
+            label={darkMode ? 'Light' : 'Dark'}
             onClick={onToggleDarkMode}
-            className="rounded-lg bg-white/15 px-3 py-2 text-sm hover:bg-white/25"
-            aria-label="Toggle dark mode"
-          >
-            {darkMode ? 'Light' : 'Dark'}
-          </button>
+            variant="primary"
+          />
         </div>
       </div>
     </nav>
