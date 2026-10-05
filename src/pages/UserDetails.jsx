@@ -1,16 +1,29 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import usersData from '../data/users'
 
 function UserDetails() {
   const { id } = useParams()
-  const user = usersData.find((item) => item.id === Number(id))
+  const [user, setUser] = useState(undefined)
 
   useEffect(() => {
-    document.title = user
-      ? `${user.name} | Team Directory App`
-      : 'User Not Found | Team Directory App'
-  }, [user])
+    const foundUser = usersData.find((item) => item.id === Number(id))
+    setUser(foundUser || null)
+
+    document.title = foundUser
+      ? foundUser.name
+      : 'User Not Found'
+  }, [id])
+
+  if (user === undefined) {
+    return (
+      <main className="min-h-[calc(100vh-72px)] bg-white p-6 dark:bg-slate-950">
+        <div className="mx-auto max-w-3xl">
+          <p className="text-gray-600 dark:text-slate-300">Loading user...</p>
+        </div>
+      </main>
+    )
+  }
 
   if (!user) {
     return (
