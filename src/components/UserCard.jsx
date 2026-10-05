@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Button from './Button'
 
 function UserCard({
@@ -28,12 +29,12 @@ function UserCard({
         />
       </div>
 
-      <a
-        href={`/users/${id}`}
+      <Link
+        to={`/users/${id}`}
         className="mt-4 inline-block font-medium text-blue-600 hover:underline dark:text-blue-400"
       >
         View Details
-      </a>
+      </Link>
     </div>
   )
 }

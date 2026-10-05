@@ -19,7 +19,7 @@ function Users({ favoriteIds, onToggleFavorite }) {
         setLoading(true)
         setError('')
 
-        await new Promise((resolve) => setTimeout(resolve, 800))
+        await new Promise((resolve) => setTimeout(resolve, 1000))
         const data = usersData
 
         if (isMounted) {
@@ -110,9 +110,7 @@ function Users({ favoriteIds, onToggleFavorite }) {
       </div>
 
       {filteredUsers.length === 0 ? (
-        <p className="rounded-lg border border-gray-200 p-6 text-center text-gray-600 dark:border-slate-700 dark:text-slate-300">
-          No users found.
-        </p>
+        <ErrorMessage message="No users found." />
       ) : (
         <div className="grid gap-4 md:grid-cols-2">
           {filteredUsers.map((user) => (
