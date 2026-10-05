@@ -30,9 +30,10 @@ function Navbar({ darkMode, onToggleDarkMode, favoriteCount }) {
           </span>
 
           <Button
-            label={darkMode ? 'Light' : 'Dark'}
+            label={darkMode ? 'Light Mode' : 'Dark Mode'}
             onClick={onToggleDarkMode}
             variant="primary"
+            className="min-w-28"
           />
         </div>
       </div>
