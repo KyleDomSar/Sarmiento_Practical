@@ -1,9 +1,16 @@
+import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import usersData from '../data/users'
 
 function UserDetails() {
   const { id } = useParams()
   const user = usersData.find((item) => item.id === Number(id))
+
+  useEffect(() => {
+    document.title = user
+      ? `${user.name} | Team Directory App`
+      : 'User Not Found | Team Directory App'
+  }, [user])
 
   if (!user) {
     return (

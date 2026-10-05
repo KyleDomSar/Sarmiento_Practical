@@ -5,6 +5,9 @@ import Loader from '../components/Loader'
 import ErrorMessage from '../components/ErrorMessage'
 
 function Users() {
+  useEffect(() => {
+    document.title = 'Users | Team Directory App'
+  }, [])
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
