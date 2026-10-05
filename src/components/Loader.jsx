@@ -1,11 +1,14 @@
 function Loader() {
   return (
-    <div className="flex flex-col items-center justify-center gap-3 py-8">
+    <div className="flex min-h-64 flex-col items-center justify-center gap-4">
       <div
-        className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600"
+        className="h-10 w-10 animate-spin rounded-full border-4 border-slate-200 border-t-blue-600 dark:border-slate-700 dark:border-t-blue-400"
         aria-hidden="true"
       />
-      <p className="text-sm text-gray-600 dark:text-slate-300">Loading...</p>
+      <div className="text-center">
+        <p className="font-semibold text-slate-800 dark:text-white">Loading...</p>
+        <p className="text-sm text-slate-500 dark:text-slate-400">Preparing the team directory</p>
+      </div>
     </div>
   )
 }
